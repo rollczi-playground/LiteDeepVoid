@@ -28,7 +28,7 @@ public class LitePaperSender implements LiteSender {
 
     @Override
     public void sendMessage(String message) {
-        this.audience.sendMessage(miniMessage.parse(message));
+        this.audience.sendMessage(miniMessage.deserialize(message));
     }
 
     @Override

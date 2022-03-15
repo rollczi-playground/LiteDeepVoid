@@ -5,8 +5,6 @@
 package dev.rollczi.litedeepvoid;
 
 import dev.rollczi.litecommands.LiteCommands;
-import dev.rollczi.litecommands.bukkit.LiteBukkitFactory;
-import dev.rollczi.litecommands.valid.ValidationInfo;
 import dev.rollczi.litedeepvoid.command.LiteDeepVoidCommand;
 import dev.rollczi.litedeepvoid.command.bind.AudienceBukkitBind;
 import dev.rollczi.litedeepvoid.command.message.InvalidUseMessageHandler;
@@ -49,18 +47,19 @@ public final class LiteDeepVoid extends JavaPlugin {
         this.viewRegistry = new ViewRegistry(deepVoid, scheduler, this.getServer(), configurationManager.getPluginConfig());
         this.deepVoidController = new DeepVoidController(audience, this.getServer(), configurationManager.getPluginConfig(), scheduler, deepVoid, viewRegistry.VOID);
 
-        this.liteCommands = LitePaperFactory.builder(this.getServer(), audience, MiniMessage.get(), "deep-void")
-                .message(ValidationInfo.INVALID_USE, new InvalidUseMessageHandler(configurationManager.getPluginConfig()))
-                .message(ValidationInfo.NO_PERMISSION, new PermissionMessageHandler(configurationManager.getPluginConfig()))
+        this.liteCommands = LitePaperFactory.builder(this.getServer(), audience, MiniMessage.miniMessage(), "deep-void")
+                .invalidUseMessage(new InvalidUseMessageHandler(configurationManager.getPluginConfig()))
+                .permissionMessage(new PermissionMessageHandler(configurationManager.getPluginConfig()))
 
-                .bind(Player.class, new PlayerBind())
-                .bind(Audience.class, new AudienceBukkitBind(audience))
-                .bind(ConfigurationManager.class, () -> configurationManager)
-                .bind(PluginConfig.class,         () -> configurationManager.getPluginConfig())
-                .bind(DeepVoid.class,             () -> deepVoid)
-                .bind(DeepVoidController.class,   () -> deepVoidController)
-                .bind(ViewRegistry.class,         () -> viewRegistry)
-                .bind(AudienceProvider.class,     () -> audience)
+                .parameterBind(Player.class, new PlayerBind())
+                .parameterBind(Audience.class, new AudienceBukkitBind(audience))
+
+                .typeBind(ConfigurationManager.class, () -> configurationManager)
+                .typeBind(PluginConfig.class,         () -> configurationManager.getPluginConfig())
+                .typeBind(DeepVoid.class,             () -> deepVoid)
+                .typeBind(DeepVoidController.class,   () -> deepVoidController)
+                .typeBind(ViewRegistry.class,         () -> viewRegistry)
+                .typeBind(AudienceProvider.class,     () -> audience)
                 .command(LiteDeepVoidCommand.class)
                 .register();
 
@@ -72,15 +71,4 @@ public final class LiteDeepVoid extends JavaPlugin {
         this.liteCommands.getPlatformManager().unregisterCommands();
     }
 
-    public DeepVoid getDeepVoid() {
-        return deepVoid;
-    }
-
-    public ViewRegistry getViewRegistry() {
-        return viewRegistry;
-    }
-
-    public Scheduler getScheduler() {
-        return scheduler;
-    }
 }

@@ -5,11 +5,12 @@
 package dev.rollczi.litedeepvoid.command.bind;
 
 import dev.rollczi.litecommands.LiteInvocation;
-import dev.rollczi.litecommands.bind.LiteBind;
+import dev.rollczi.litecommands.bind.Parameter;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.command.CommandSender;
 
-public class AudienceBukkitBind implements LiteBind {
+public class AudienceBukkitBind implements Parameter<Audience> {
 
     private final BukkitAudiences bukkitAudiences;
 

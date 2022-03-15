@@ -7,6 +7,7 @@ package dev.rollczi.litedeepvoid.command.paper;
 import dev.rollczi.litecommands.LiteCommandsBuilder;
 import dev.rollczi.litecommands.LiteFactory;
 import dev.rollczi.litecommands.bind.basic.OriginalSenderBind;
+import dev.rollczi.litecommands.platform.LitePlatformManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Server;
@@ -16,10 +17,10 @@ public class LitePaperFactory {
 
     private LitePaperFactory() {}
 
-    public static LiteCommandsBuilder builder(Server server, BukkitAudiences audiences, MiniMessage miniMessage, String fallbackPrefix) {
-        return LiteFactory.builder()
-                .bind(Server.class, server)
-                .bind(CommandSender.class, new OriginalSenderBind())
+    public static <SENDER, P extends LitePlatformManager<SENDER>> LiteCommandsBuilder<CommandSender, LitePaperPlatformManager> builder(Server server, BukkitAudiences audiences, MiniMessage miniMessage, String fallbackPrefix) {
+        return LiteFactory.<CommandSender, LitePaperPlatformManager>builder()
+                .typeBind(Server.class, server)
+                .typeBind(CommandSender.class, new OriginalSenderBind())
                 .platform(new LitePaperPlatformManager(server, miniMessage, fallbackPrefix, audiences));
     }
 

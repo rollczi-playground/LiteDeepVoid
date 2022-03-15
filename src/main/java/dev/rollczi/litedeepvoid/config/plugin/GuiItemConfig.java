@@ -22,19 +22,19 @@ import panda.utilities.StringUtils;
 public class GuiItemConfig {
 
     @Exclude
-    private final MiniMessage miniMessage = MiniMessage.get();
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public Material type = Material.STONE;
     public String skull = StringUtils.EMPTY;
     public int durability = 0;
-    public Component name = miniMessage.parse("<green>text</green>");
+    public Component name = miniMessage.deserialize("<green>text</green>");
 
     public GuiItemConfig() {}
 
     public GuiItemConfig(Material type, int durability, String name) {
         this.type = type;
         this.durability = durability;
-        this.name = miniMessage.parse(name);
+        this.name = miniMessage.deserialize(name);
     }
 
      public GuiItem toGuiItem(GuiAction<InventoryClickEvent> action) {

@@ -13,11 +13,11 @@ import panda.std.Result;
 
 public class ComponentComposer implements Composer<Component>, SimpleDeserializer<Component>, SimpleSerializer<Component> {
 
-    private final MiniMessage miniMessage = MiniMessage.get();
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     @Override
     public Result<Component, Exception> deserialize(String source) {
-        return Result.ok(miniMessage.parse(source));
+        return Result.ok(miniMessage.deserialize(source));
     }
 
     @Override

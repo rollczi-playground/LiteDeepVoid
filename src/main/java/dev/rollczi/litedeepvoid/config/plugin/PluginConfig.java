@@ -20,7 +20,7 @@ import java.util.Map;
 public class PluginConfig extends AbstractConfigWithResource {
 
     @Exclude
-    private final MiniMessage miniMessage = MiniMessage.get();
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public PluginConfig(File folder, String child) {
         super(folder, child);
@@ -31,7 +31,7 @@ public class PluginConfig extends AbstractConfigWithResource {
     @Description("#  Gui  #")
     @Description("# ----- #")
 
-    public Component title = miniMessage.parse("<dark_gray> » DeepVoid</dark_gray>");
+    public Component title = miniMessage.deserialize("<dark_gray> » DeepVoid</dark_gray>");
 
     public int previousSlot = 3;
     public int nextSlot = 7;
@@ -57,37 +57,37 @@ public class PluginConfig extends AbstractConfigWithResource {
     @Description("# ---------- #")
 
     public List<Component> help = Arrays.asList(
-        miniMessage.parse("<green>-------------------<green>"),
-        miniMessage.parse("<green>/void<green>"),
-        miniMessage.parse("<green>/void help<green>"),
-        miniMessage.parse("<green>/void on<green>"),
-        miniMessage.parse("<green>/void off<green>"),
-        miniMessage.parse("<green>/void czysc<green>"),
-        miniMessage.parse("<green>-------------------<green>")
+        miniMessage.deserialize("<green>-------------------<green>"),
+        miniMessage.deserialize("<green>/void<green>"),
+        miniMessage.deserialize("<green>/void help<green>"),
+        miniMessage.deserialize("<green>/void on<green>"),
+        miniMessage.deserialize("<green>/void off<green>"),
+        miniMessage.deserialize("<green>/void czysc<green>"),
+        miniMessage.deserialize("<green>-------------------<green>")
     );
-    public Component invalidUsage = miniMessage.parse("<dark_gray> » </dark_gray><red>Poprawne użycie</red><dark_gray> » </dark_gray><gray>${usage}");
-    public Component invalidPermission = miniMessage.parse("<dark_gray> » </dark_gray><red>Nie posiadasz permisji! <gray>(${permissions})");
+    public Component invalidUsage = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Poprawne użycie</red><dark_gray> » </dark_gray><gray>${usage}");
+    public Component invalidPermission = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Nie posiadasz permisji! <gray>(${permissions})");
 
-    public Component voidEnabled = miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań została <green>włączona</green>!</gray>");
-    public Component voidDisabled = miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań została <red>wyłączona</red>!</gray>");
-    public Component voidAlreadyEnabled = miniMessage.parse("<dark_gray> » </dark_gray><red>Otchłań jest już włączona!</red>");
-    public Component voidAlreadyDisabled = miniMessage.parse("<dark_gray> » </dark_gray><red>Otchłań jest już wyłączona!</red>");
-    public Component voidReload = miniMessage.parse("<dark_gray> » </dark_gray><green>Plugin został poprawnie przeładowany</green>");
-    public Component voidReloadError = miniMessage.parse("<dark_gray> » </dark_gray><red>Problem z przeładowaniem pluginu! <hover:show_text:'<red>${stacktrace}'><gray>(stacktrace)</gray><hover></red>");
-    public Component voidClean = miniMessage.parse("<dark_gray> » </dark_gray><green>Czyszczenie światów!</green>");
-    public Component voidClosedInfo = miniMessage.parse("<dark_gray> » </dark_gray><red>Otchłań zostanie otwarta za <yellow>${time}!</yellow></red>");
-    public Component voidClosedForce = miniMessage.parse("<dark_gray> » </dark_gray><red>Otchłań została zamknięta!</red>");
-    public Component voidDisabledInfo = miniMessage.parse("<dark_gray> » </dark_gray><red>Otchłań została wyłączona przez administratora!</red>");
+    public Component voidEnabled = miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań została <green>włączona</green>!</gray>");
+    public Component voidDisabled = miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań została <red>wyłączona</red>!</gray>");
+    public Component voidAlreadyEnabled = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Otchłań jest już włączona!</red>");
+    public Component voidAlreadyDisabled = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Otchłań jest już wyłączona!</red>");
+    public Component voidReload = miniMessage.deserialize("<dark_gray> » </dark_gray><green>Plugin został poprawnie przeładowany</green>");
+    public Component voidReloadError = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Problem z przeładowaniem pluginu! <hover:show_text:'<red>${stacktrace}'><gray>(stacktrace)</gray><hover></red>");
+    public Component voidClean = miniMessage.deserialize("<dark_gray> » </dark_gray><green>Czyszczenie światów!</green>");
+    public Component voidClosedInfo = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Otchłań zostanie otwarta za <yellow>${time}!</yellow></red>");
+    public Component voidClosedForce = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Otchłań została zamknięta!</red>");
+    public Component voidDisabledInfo = miniMessage.deserialize("<dark_gray> » </dark_gray><red>Otchłań została wyłączona przez administratora!</red>");
     public Map<Long, Component> messagesInTime = new ImmutableMap.Builder<Long, Component>()
-            .put(1200L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>60s</green>!</gray>"))
-            .put(600L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>30s</green>!</gray>"))
-            .put(200L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>10s</green>!</gray>"))
-            .put(100L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>5s</green>!</gray>"))
-            .put(80L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>4s</green>!</gray>"))
-            .put(60L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>3s</green>!</gray>"))
-            .put(40L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>2s</green>!</gray>"))
-            .put(20L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>1s</green>!</gray>"))
-            .put(0L, miniMessage.parse("<dark_gray> » </dark_gray><gray>Otchłań została otwarta <hover:show_text:'<gray>Kliknij!</gray>'><click:run_command:'/void'><green>(/void)</green></click></gray>"))
+            .put(1200L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>60s</green>!</gray>"))
+            .put(600L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>30s</green>!</gray>"))
+            .put(200L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>10s</green>!</gray>"))
+            .put(100L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>5s</green>!</gray>"))
+            .put(80L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>4s</green>!</gray>"))
+            .put(60L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>3s</green>!</gray>"))
+            .put(40L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>2s</green>!</gray>"))
+            .put(20L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań zbierze itemy za <green>1s</green>!</gray>"))
+            .put(0L, miniMessage.deserialize("<dark_gray> » </dark_gray><gray>Otchłań została otwarta <hover:show_text:'<gray>Kliknij!</gray>'><click:run_command:'/void'><green>(/void)</green></click></gray>"))
             .build();
 
 }

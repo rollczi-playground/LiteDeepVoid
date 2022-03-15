@@ -6,11 +6,12 @@ package dev.rollczi.litedeepvoid.command.bind;
 
 import dev.rollczi.litecommands.LiteInvocation;
 import dev.rollczi.litecommands.bind.LiteBind;
+import dev.rollczi.litecommands.bind.Parameter;
 import dev.rollczi.litecommands.valid.ValidationCommandException;
 import dev.rollczi.litecommands.valid.ValidationInfo;
 import org.bukkit.entity.Player;
 
-public class PlayerBind implements LiteBind {
+public class PlayerBind implements Parameter<Player> {
 
     @Override
     public Object apply(LiteInvocation invocation) {
