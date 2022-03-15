@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
+}
+
+group = 'dev.rollczi'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url "https://repo.panda-lang.org/releases" }
+    maven { url "https://papermc.io/repo/repository/maven-public/" }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url "https://repo.mattstudios.me/artifactory/public/" }
+}
+
+dependencies {
+    // Spigot API
+    compileOnly 'org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT'
+
+    // kyori adventure
+    implementation "net.kyori:adventure-platform-bukkit:4.0.1"
+    implementation "net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT"
+
+    // LiteCommands
+    implementation "dev.rollczi.litecommands:core:1.5.0"
+    implementation "dev.rollczi.litecommands:bukkit:1.5.0"
+
+    // TriumphGui
+    implementation "dev.triumphteam:triumph-gui:3.1.1"
+
+    // CDN
+    implementation 'net.dzikoysk:cdn:1.13.5'
+}
+
+compileJava.options.encoding = "UTF-8"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    archiveFileName = "LiteDeepVoid v${project.version} (MC 1.8.8-1.18).jar"
+
+    exclude "org/intellij/lang/annotations/**"
+    exclude "org/jetbrains/annotations/**"
+    exclude "javax/**"
+
+    relocate "net.dzikoysk", "dev.rollczi.litedeepvoid.libs.net.dzikoysk"
+    relocate "dev.rollczi.litecommands", "dev.rollczi.litedeepvoid.libs.dev.rollczi.litecommands"
+    relocate "dev.triumphteam", "dev.rollczi.litedeepvoid.libs.dev.triumphteam"
+    relocate "net.kyori", "dev.rollczi.litedeepvoid.libs.net.kyori"
+    relocate "panda", "dev.rollczi.litedeepvoid.libs.panda"
+    relocate "org.panda_lang", "dev.rollczi.litedeepvoid.libs.panda"
+}

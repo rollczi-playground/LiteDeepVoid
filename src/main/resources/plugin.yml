@@ -1,0 +1,5 @@
+name: LiteDeepVoid
+version: '${version}'
+main: dev.rollczi.litedeepvoid.LiteDeepVoid
+api-version: 1.18
+authors: [ Rollczi ]
